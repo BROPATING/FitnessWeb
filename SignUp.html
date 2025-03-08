@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-image: url("Images/Login_Back.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-color: transparent;
+    }
+    .form {
+        height: max-content;
+        width: 30%;
+        background-image: url(./Images/WhatsApp\ Image\ 2024-03-01\ at\ 11.33.44\ AM.jpeg);
+        display: block;
+        margin: 0 auto;
+        color: black;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+        opacity: 0.3;
+        text-align: left;
+        padding: 30px;
+        padding-bottom: 30px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    body.loaded {
+        animation: fadeIn 2s;
+    }
+    input {
+        background: rgba(237, 237, 237, 0.1);
+        width: 100%;
+        padding: 4px;
+        border: none;
+        outline: none;
+    }
+    input:active {
+        border-radius: 100px;
+    }
+    input:focus {
+        border-radius: 20px;
+        border-bottom: 2px solid black;
+        outline: none;
+        padding-left: 10px;
+    }
+    .form:hover {
+        transition: 1s ease;
+        opacity: 0.8;
+        color: white;
+        border-radius: 20px;
+        box-shadow: 0 8px 8px rgba(1, 0, 0.1);
+    }
+    .heading {
+        color: aliceblue;
+        margin-left: 43%;
+        margin-bottom: 0px;
+    }
+
+    .submit-btn{
+        border: 2px solid lightgreen;
+        border-radius: 20px;
+        padding: 5px;
+    }
+</style>
+<body>
+    <div>
+        <h1 class="heading">Sign Up Page</h1>
+    </div>
+    <div id="signUpForm">
+        <form class="form">
+            <div>
+                <label for="firstName">First Name : </label><br>
+                <input type="text" id="firstName" name="firstName" required><br><br>
+            </div> 
+            <div>
+                <label for="lastName">Last Name : </label><br>
+                <input type="text" name="lastName" id="lastName" required><br><br>
+            </div>
+            <div>
+                <label for="email">E-Mail : </label><br>
+                <input type="text" name="email" id="email" required> <br><br>
+            <div>
+                <label for="password">Password : </label><br>
+                <input type="text" name="password" id="password" required><br><br>
+            </div>   
+                
+            </div>
+            <div>
+                <label for="confirmPassword">Confirm Password</label><br>
+                <input type="text" name="confirmPassword" id="confirmPassword" required><br><br>
+            </div>
+            <div>
+                <label for="dd-mm-yy">Date-Month-Year : </label><br>
+                <input type="date" placeholder="calendar"><br><br>
+            </div>
+            <div>
+                <select name="Gender" id="Gender"><br>
+                    <option value="Select Gender">Select a Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select><br><br>
+            </div>
+            <div>
+                <button type="button" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+    });
+</script>
+</html>
