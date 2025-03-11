@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sending</title>
+    <style>
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1f242d;
+        }
+        .contact h2{
+            color: whitesmoke;
+            font-size: 40px;
+            font-weight: bolder;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .contact form{
+            width: 600px;
+            text-align: center;
+            margin: 2px;
+        }
+        form .input-box{
+            display: flex;
+            justify-content: space-between;
+        }
+        .field .item{
+            width: 100%;
+            padding: 18px;
+            background: transparent;
+            border: 2px solid #0ef;
+            outline: none;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #ededed;
+            margin: 12px 0;
+        }
+        .field .item::placeholder{
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .input-box .input-field{
+            width: 48.5%;
+        }
+        form .textarea-field .item {
+            resize: none;
+        }
+        form button{
+            background: #0ef;
+            padding: 12px 32px;
+            border: none;
+            outline: none;
+            border-radius: 6px;
+            box-shadow: 0 0 10px #0ef;
+            font-size: 16px;
+            color: #333;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.5s;
+        }
+        button:hover{
+            box-shadow: none;
+        }
+        .field .error-txt{
+            font-size: 14.5px;
+            color: red;
+            text-align: left;
+            margin: -5px 0 10px;
+            display: none;
+        }
+        form .textarea-field .error-txt{
+            margin-top: -10px;
+        }
+        .field.error .item{
+            border-color: red;
+        }
+        .field.error .error-txt{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section class="contact">
+        <h2>Contact Me!</h2>
+        <form action="#">
+            <div class="input-box">
+                <div class="input-field field">
+                    <input type="text" id="name" class="item" autocomplete="off" placeholder="Full Name">
+                    <div class="error-txt">Full Name Can't Be Blank</div>
+                </div>
+                <div class="input-field field">
+                    <input type="text" id="email" class="item" autocomplete="off" placeholder="Email Address">
+                    <div class="error-txt">Email Can't Be Blank</div>
+                </div>
+            </div>
+            <div class="input-box">
+                <div class="input-field field">
+                    <input type="text" id="phone" class="item" autocomplete="off" placeholder="Phone Number">
+                    <div class="error-txt">Phone Number Can't Be Blank</div>
+                </div>
+                <div class="input-field field">
+                    <input type="text" id="subject" class="item" autocomplete="off" placeholder="Subject">
+                    <div class="error-txt">Subject Can't Be Blank</div>
+                </div>
+            </div>
+            <div class="textarea-field field input-box">
+                <textarea id="message" class="item" cols="30" rows="10" placeholder="Enter Message" autocomplete="off"></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <script>
+        const form = document.querySelector("form");
+        const fullName = document.getElementById("name");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const subject = document.getElementById("subject");
+        const message = document.getElementById("message");
+
+        function sendEmail() {
+            const bodyMessage = `Full Name: ${fullName.value}<br> Email: ${email.value} <br> Phone Number: ${phone.value}<br> Message: ${message.value}`;
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "bropating2004@gmail.com",
+                Password: "407AA151071C3DB6E85ED72F37F1A5061625",
+                To: 'bropating2004@gmail.com',
+                From: "bropating2004@gmail.com",
+                Subject: subject.value,
+                Body: bodyMessage
+            }).then(
+                message => {
+                    if (message === "OK") {
+                        Swal.fire({
+                            title: "Success",
+                            text: "Message Sent Successfully!",
+                            icon: "success"
+                        });
+                    }
+                }
+            );
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            checkInput();
+            if (isFormValid()) {
+                sendEmail();
+            }
+        });
+
+        function checkInput() {
+            const items = document.querySelectorAll(".item");
+            for (const item of items) {
+                if (item.value === "") {
+                    item.classList.add("error");
+                    item.parentElement.classList.add("error");
+                }
+                item.addEventListener("keyup", () => {
+                    if (item.value !== "") {
+                        item.classList.remove("error");
+                        item.parentElement.classList.remove("error");
+                    } else {
+                        item.classList.add("error");
+                        item.parentElement.classList.add("error");
+                    }
+                });
+            }
+        }
+
+        function isFormValid() {
+            const items = document.querySelectorAll(".item");
+            for (const item of items) {
+                if (item.value === "") {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
